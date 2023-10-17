@@ -7,13 +7,11 @@
 
   src = ./.;
 
-  buildInputs = [
-    SDL2
-  ];
-
   buildPhase = ''
     mkdir -p $out
-    ${stdenv.cc}/bin/c++ -Wall -O -g -o $out/sdlfoo main.cpp -lSDL2
-
+    ${stdenv.cc}/bin/${stdenv.cc.targetPrefix}c++ \
+      -Wall -O -g \
+      -o $out/sdlfoo main.cpp \
+      -L${SDL2}/bin -L${SDL2}/lib -lSDL2 -I${SDL2}/include
   '';
 }
